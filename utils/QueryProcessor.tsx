@@ -15,5 +15,17 @@ export default function QueryProcessor(query: string): string {
     return "My Andrew ID is tharsono.";
   }
 
+  if (query.toLowerCase().includes("which of the following numbers is the largest:")) {
+    const numbers = query.split(":")[1].split(",").map(num => parseFloat(num.trim()));
+    const maxNumber = Math.max(...numbers); 
+    return "The largest number is " + maxNumber + ".";
+  }
+
+  if (query.toLowerCase().includes("plus")) {
+    const first = parseFloat(query.split("plus")[0].trim());
+    const second = parseFloat(query.split("plus")[1].trim());
+    return "The sum is " + (first + second) + ".";
+  }
+
   return ""
 }

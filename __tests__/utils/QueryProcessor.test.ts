@@ -34,4 +34,20 @@ describe("QueryProcessor", () => {
         ));
     });
 
+    test('should return largest number', () => {
+        const query = "Which of the following numbers is the largest: 5, 10, 3?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+            "The largest number is 10."
+        ));
+    });
+
+    test('should return sum', () => {
+        const query = "5 plus 10";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+            "The sum is 15."
+        ));
+    });
+
 });
