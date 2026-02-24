@@ -73,4 +73,13 @@ describe("QueryProcessor", () => {
             "73, 31"
         ));
     });
+
+    test("should return power", () => {
+        const query = "What is 2 to the power of 3?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+            "8"
+        ));
+    });
+
 });

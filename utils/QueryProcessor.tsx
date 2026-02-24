@@ -85,5 +85,19 @@ export default function QueryProcessor(query: string): string {
       return primes.join(", ");
     }
   }
-  return ""
+
+  if(query.toLowerCase().startsWith("what is") && query.toLowerCase().includes("to the power of")){
+    const parts = query
+    .toLowerCase()
+    .replace("what is", "")
+    .split("to the power of");
+    const first = parseFloat(parts[0].trim());
+    const second = parseFloat(parts[1].trim());
+
+    if (!isNaN(first) && !isNaN(second)) {
+      return `${Math.pow(first, second)}`;
+    }
+  }
+
+return ""
 }
