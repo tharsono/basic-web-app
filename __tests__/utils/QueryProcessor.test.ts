@@ -43,7 +43,7 @@ describe("QueryProcessor", () => {
     });
 
     test('should return sum', () => {
-        const query = "5 plus 10";
+        const query = "What is 5 plus 10?";
         const response: string = QueryProcessor(query);
         expect(response).toBe((
             "The sum is 15."

@@ -27,18 +27,20 @@ export default function QueryProcessor(query: string): string {
     return "No valid numbers found in the query.";
   }
 
-  if (query.toLowerCase().includes("plus")) {
-    if (query.toLowerCase().includes("plus")) {
-      const parts = query.toLowerCase().split("plus");
-      const first = parseFloat(parts[0].trim());
-      const second = parseFloat(parts[1].trim());
-    
-      if (!isNaN(first) && !isNaN(second)) {
-        return `The sum is ${first + second}.`;
-      }
-      return "Invalid numbers provided for addition.";
+  if (query.toLowerCase().startsWith("what is") && query.toLowerCase().includes("plus")) {
+    const parts = query
+      .toLowerCase()
+      .replace("what is", "")
+      .split("plus");
+    const first = parseFloat(parts[0].trim());
+    const second = parseFloat(parts[1].trim());
+  
+    if (!isNaN(first) && !isNaN(second)) {
+      return `The sum is ${first + second}.`;
     }
+    return "Invalid numbers provided for addition.";
   }
+  
 
   return ""
 }
