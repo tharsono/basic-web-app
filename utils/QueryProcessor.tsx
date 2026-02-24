@@ -22,7 +22,7 @@ export default function QueryProcessor(query: string): string {
 
     if (numbers && numbers.length > 0) {
       const largest = Math.max(...numbers);
-      return `The largest number is ${largest}.`;
+      return `${largest}`;
     }
     return "No valid numbers found in the query.";
   }
@@ -36,9 +36,23 @@ export default function QueryProcessor(query: string): string {
     const second = parseFloat(parts[1].trim());
   
     if (!isNaN(first) && !isNaN(second)) {
-      return `The sum is ${first + second}.`;
+      return `${first + second}`;
     }
     return "Invalid numbers provided for addition.";
+  }
+
+  if (query.toLowerCase().startsWith("what is") && query.toLowerCase().includes("multiplied by")){
+    const parts = query
+    .toLowerCase()
+    .replace("what is", "")
+    .split("multiplied by");
+    const first = parseFloat(parts[0].trim());
+    const second = parseFloat(parts[1].trim());
+
+    if (!isNaN(first) && !isNaN(second)) {
+      return `${first * second}`;
+    }
+    return "Invalid numbers provided for multiplication.";
   }
   
 

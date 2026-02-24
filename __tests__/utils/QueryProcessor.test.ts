@@ -38,7 +38,7 @@ describe("QueryProcessor", () => {
         const query = "Which of the following numbers is the largest: 5, 10, 3?";
         const response: string = QueryProcessor(query);
         expect(response).toBe((
-            "The largest number is 10."
+            "10"
         ));
     });
 
@@ -46,8 +46,15 @@ describe("QueryProcessor", () => {
         const query = "What is 5 plus 10?";
         const response: string = QueryProcessor(query);
         expect(response).toBe((
-            "The sum is 15."
+            "15"
         ));
     });
 
+    test('should return product', () => {
+        const query = "What is 5 multiplied by 10?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+            "50"
+        ));
+    });
 });
