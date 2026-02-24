@@ -16,15 +16,28 @@ export default function QueryProcessor(query: string): string {
   }
 
   if (query.toLowerCase().includes("which of the following numbers is the largest:")) {
-    const numbers = query.split(":")[1].split(",").map(num => parseFloat(num.trim()));
-    const maxNumber = Math.max(...numbers); 
-    return "The largest number is " + maxNumber + ".";
+    const numbers = query
+      .match(/[-]?\d+(\.\d+)?/g) // Extract numbers (including decimals and negatives)
+      ?.map(Number); // Convert to numbers
+
+    if (numbers && numbers.length > 0) {
+      const largest = Math.max(...numbers);
+      return `The largest number is ${largest}.`;
+    }
+    return "No valid numbers found in the query.";
   }
 
   if (query.toLowerCase().includes("plus")) {
-    const first = parseFloat(query.split("plus")[0].trim());
-    const second = parseFloat(query.split("plus")[1].trim());
-    return "The sum is " + (first + second) + ".";
+    if (query.toLowerCase().includes("plus")) {
+      const parts = query.toLowerCase().split("plus");
+      const first = parseFloat(parts[0].trim());
+      const second = parseFloat(parts[1].trim());
+    
+      if (!isNaN(first) && !isNaN(second)) {
+        return `The sum is ${first + second}.`;
+      }
+      return "Invalid numbers provided for addition.";
+    }
   }
 
   return ""
