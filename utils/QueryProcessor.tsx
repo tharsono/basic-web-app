@@ -54,7 +54,36 @@ export default function QueryProcessor(query: string): string {
     }
     return "Invalid numbers provided for multiplication.";
   }
-  
 
+  if (query.toLowerCase().startsWith("what is") && query.toLowerCase().includes("minus")){
+    const parts = query
+    .toLowerCase()
+    .replace("what is", "")
+    .split("minus");
+    const first = parseFloat(parts[0].trim());
+    const second = parseFloat(parts[1].trim());
+
+    if (!isNaN(first) && !isNaN(second)) {
+      return `${first - second}`;
+    }
+    return "Invalid numbers provided for subtraction.";
+  }
+
+  if (query.toLowerCase().includes("which of the following numbers are primes:")){
+    const numbers = query
+    .match(/[-]?\d+(\.\d+)?/g) // Extract numbers (including decimals and negatives)
+    ?.map(Number); // Convert to numbers
+
+    if (numbers && numbers.length > 0) {
+      const primes = numbers.filter(num => {
+        if (num < 2) return false;
+        for (let i = 2; i <= Math.sqrt(num); i++) {
+          if (num % i === 0) return false;
+        }
+        return true;
+      });
+      return primes.join(", ");
+    }
+  }
   return ""
 }

@@ -57,4 +57,20 @@ describe("QueryProcessor", () => {
             "50"
         ));
     });
+
+    test ('should return difference', () => {
+        const query = "What is 10 minus 5?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+            "5"
+        ));
+    });
+
+    test('should return primes', () => {
+        const query = "Which of the following numbers are primes: 55, 34, 73, 31, 86?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+            "73, 31"
+        ));
+    });
 });
